@@ -5,11 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VISTORA - Online Shopping</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; text-align: center; }
-        header { background: #2c3e50; color: white; padding: 20px; font-size: 24px; }
-        .container { padding: 20px; }
-        .product { display: inline-block; margin: 20px; padding: 20px; border: 1px solid #ccc; }
-        .cart { margin-top: 20px; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            font-size: 24px;
+        }
+        .container {
+            padding: 20px;
+        }
+        .product {
+            display: inline-block;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        .product img {
+            width: 150px;
+            height: auto;
+        }
+        .cart {
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -17,64 +41,37 @@
     <div class="container">
         <h2>Featured Products</h2>
         <div class="product">
-            <h3>Product 1</h3>
-            <p>$20</p>
-            <button onclick="addToCart('Product 1', 20)">Add to Cart</button>
+            <img src="images/smartphone.jpg" alt="Smartphone">
+            <h3>Smartphone</h3>
+            <p>Latest 5G smartphone with great features.</p>
+            <p>$499</p>
+            <button onclick="addToCart('Smartphone', 499)">Add to Cart</button>
         </div>
         <div class="product">
-            <h3>Product 2</h3>
-            <p>$35</p>
-            <button onclick="addToCart('Product 2', 35)">Add to Cart</button>
+            <img src="images/laptop.jpg" alt="Laptop">
+            <h3>Laptop</h3>
+            <p>Powerful laptop with fast performance.</p>
+            <p>$899</p>
+            <button onclick="addToCart('Laptop', 899)">Add to Cart</button>
         </div>
+
         <div class="cart">
             <h2>Shopping Cart</h2>
             <ul id="cart-list"></ul>
             <p>Total: $<span id="total">0</span></p>
         </div>
     </div>
+
     <script>
         let total = 0;
         function addToCart(product, price) {
-            let cartList = document.getElementById('cart-list');
-            let listItem = document.createElement('li');
-            listItem.textContent = product + " - $" + price;
+            const cartList = document.getElementById('cart-list');
+            const listItem = document.createElement('li');
+            listItem.textContent = `${product} - $${price}`;
             cartList.appendChild(listItem);
             total += price;
             document.getElementById('total').textContent = total;
         }
-        [
-  {
-    "id": 1,
-    "name": "Smartphone",
-    "price": "$499",
-    "image": "images/smartphone.jpg",
-    "description": "Latest 5G smartphone with great features."
-  },
-  {
-    "id": 2,
-    "name": "Laptop",
-    "price": "$899",
-    "image": "images/laptop.jpg",
-    "description": "Powerful laptop with fast performance."
-  }
-]
-
-        .product {
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin: 10px;
-    text-align: center;
-}
-.product img {
-    width: 150px;
-    height: auto;
-}
     </script>
 </body>
 </html>
-
-
-
-
-
-
