@@ -11,12 +11,19 @@
         .product { display: inline-block; margin: 20px; padding: 20px; border: 1px solid #ccc; }
         .cart { margin-top: 20px; }
         button { margin: 5px; padding: 10px 20px; cursor: pointer; }
+        .search-bar { margin: 20px 0; }
+        input[type="text"] { padding: 10px; width: 200px; }
     </style>
 </head>
 <body>
     <header>VISTORA - Your Online Shopping Destination</header>
     <div class="container">
         <h2>Featured Products</h2>
+
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search products..." oninput="searchProducts()">
+        </div>
 
         <!-- Filter Buttons -->
         <div style="text-align: center; margin: 20px 0;">
@@ -25,7 +32,7 @@
             <button onclick="filterProducts('laptop')">Laptops</button>
         </div>
 
-        <div class="product" data-category="phone">
+        <div class="product" data-category="phone" data-name="smartphone">
             <img src="images/phone.jpg" alt="Smartphone" width="150">
             <h3>Smartphone</h3>
             <p>Latest 5G smartphone with great features.</p>
@@ -33,7 +40,7 @@
             <button onclick="addToCart('Smartphone', 20000)">Add to Cart</button>
         </div>
 
-        <div class="product" data-category="laptop">
+        <div class="product" data-category="laptop" data-name="laptop">
             <img src="images/Laptop/Laptop.jpg" alt="Laptop" width="150">
             <h3>Laptop</h3>
             <p>Powerful laptop with fast performance.</p>
@@ -64,6 +71,19 @@
             products.forEach(product => {
                 const productCategory = product.getAttribute('data-category');
                 if (category === 'all' || productCategory === category) {
+                    product.style.display = 'inline-block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+
+        function searchProducts() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const products = document.querySelectorAll('.product');
+            products.forEach(product => {
+                const name = product.getAttribute('data-name').toLowerCase();
+                if (name.includes(input)) {
                     product.style.display = 'inline-block';
                 } else {
                     product.style.display = 'none';
