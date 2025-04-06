@@ -217,6 +217,7 @@
 
     function displayProducts() {
       const container = document.getElementById('productsContainer');
+      container.innerHTML = ""; // Clear previous content
       products.forEach(prod => {
         const div = document.createElement('div');
         div.className = 'product';
@@ -238,6 +239,7 @@
       });
     }
 
+    // Load products on page load
     displayProducts();
   </script>
 </body>
