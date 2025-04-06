@@ -57,6 +57,7 @@
             <h2>Shopping Cart</h2>
             <ul id="cart-list"></ul>
             <p>Total: $<span id="total">0</span></p>
+            <a href="checkout.html"><button>Proceed to Checkout</button></a>
         </div>
     </div>
 
@@ -99,52 +100,40 @@
 </body>
 </html>
 
-<!-- Smartphone Page -->
-<!-- Save as smartphone.html -->
+<!-- Checkout Page -->
+<!-- Save as checkout.html -->
 <!--
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smartphone - VISTORA</title>
+    <title>Checkout - VISTORA</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        body { font-family: Arial, sans-serif; padding: 20px; text-align: center; }
         header { background: #2c3e50; color: white; padding: 20px; font-size: 24px; }
+        .form-group { margin: 15px 0; }
+        input[type="text"], input[type="email"], input[type="number"] { padding: 10px; width: 250px; }
     </style>
 </head>
 <body>
-    <header>Smartphone - Product Page</header>
-    <img src="images/phone.jpg" alt="Smartphone" width="200">
-    <h2>Smartphone</h2>
-    <p>Latest 5G smartphone with advanced camera, long battery life, and stunning display.</p>
-    <p>Price: 20000rs</p>
-    <button onclick="alert('Added to cart')">Add to Cart</button>
-</body>
-</html>
--->
-
-<!-- Laptop Page -->
-<!-- Save as laptop.html -->
-<!--
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laptop - VISTORA</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
-        header { background: #2c3e50; color: white; padding: 20px; font-size: 24px; }
-    </style>
-</head>
-<body>
-    <header>Laptop - Product Page</header>
-    <img src="images/Laptop/Laptop.jpg" alt="Laptop" width="200">
-    <h2>Laptop</h2>
-    <p>High-performance laptop with latest processor, 16GB RAM, and SSD storage.</p>
-    <p>Price: 40000rs</p>
-    <button onclick="alert('Added to cart')">Add to Cart</button>
+    <header>Checkout - VISTORA</header>
+    <h2>Enter Shipping Details</h2>
+    <form>
+        <div class="form-group">
+            <input type="text" placeholder="Full Name" required>
+        </div>
+        <div class="form-group">
+            <input type="email" placeholder="Email" required>
+        </div>
+        <div class="form-group">
+            <input type="text" placeholder="Address" required>
+        </div>
+        <div class="form-group">
+            <input type="number" placeholder="Phone Number" required>
+        </div>
+        <button type="submit" onclick="alert('Order placed successfully!')">Place Order</button>
+    </form>
 </body>
 </html>
 -->
