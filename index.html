@@ -5,53 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VISTORA - Online Shopping</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-        }
-        header {
-            background: #2c3e50;
-            color: white;
-            padding: 20px;
-            font-size: 24px;
-        }
-        .container {
-            padding: 20px;
-        }
-        .product {
-            display: inline-block;
-            margin: 20px;
-            padding: 20px;
-            border: 1px solid #ccc;
-            text-align: center;
-        }
-        .product img {
-            width: 150px;
-            height: auto;
-        }
-        .cart {
-            margin-top: 20px;
-        }
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; text-align: center; }
+        header { background: #2c3e50; color: white; padding: 20px; font-size: 24px; }
+        .container { padding: 20px; }
+        .product { display: inline-block; margin: 20px; padding: 20px; border: 1px solid #ccc; }
+        .cart { margin-top: 20px; }
+        button { margin: 5px; padding: 10px 20px; cursor: pointer; }
     </style>
 </head>
 <body>
     <header>VISTORA - Your Online Shopping Destination</header>
     <div class="container">
         <h2>Featured Products</h2>
-        <div class="product">
-         <img src="smartphone.jpg" alt="Smartphone" />
+
+        <!-- Filter Buttons -->
+        <div style="text-align: center; margin: 20px 0;">
+            <button onclick="filterProducts('all')">All</button>
+            <button onclick="filterProducts('phone')">Phones</button>
+            <button onclick="filterProducts('laptop')">Laptops</button>
+        </div>
+
+        <div class="product" data-category="phone">
+            <img src="images/phone.jpg" alt="Smartphone" width="150">
             <h3>Smartphone</h3>
             <p>Latest 5G smartphone with great features.</p>
-            <p>₹20,000</p>
+            <p>20000rs</p>
             <button onclick="addToCart('Smartphone', 20000)">Add to Cart</button>
         </div>
-        <div class="product">
-              <img src="Laptop.jpg" alt="Laptop" />
+
+        <div class="product" data-category="laptop">
+            <img src="images/Laptop/Laptop.jpg" alt="Laptop" width="150">
             <h3>Laptop</h3>
             <p>Powerful laptop with fast performance.</p>
-            <p>₹40,000</p>
+            <p>40000rs</p>
             <button onclick="addToCart('Laptop', 40000)">Add to Cart</button>
         </div>
 
@@ -65,12 +51,24 @@
     <script>
         let total = 0;
         function addToCart(product, price) {
-            const cartList = document.getElementById('cart-list');
-            const listItem = document.createElement('li');
-            listItem.textContent = `${product} - $${price}`;
+            let cartList = document.getElementById('cart-list');
+            let listItem = document.createElement('li');
+            listItem.textContent = product + " - $" + price;
             cartList.appendChild(listItem);
             total += price;
             document.getElementById('total').textContent = total;
+        }
+
+        function filterProducts(category) {
+            const products = document.querySelectorAll('.product');
+            products.forEach(product => {
+                const productCategory = product.getAttribute('data-category');
+                if (category === 'all' || productCategory === category) {
+                    product.style.display = 'inline-block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
         }
     </script>
 </body>
