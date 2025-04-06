@@ -13,6 +13,7 @@
         button { margin: 5px; padding: 10px 20px; cursor: pointer; }
         .search-bar { margin: 20px 0; }
         input[type="text"] { padding: 10px; width: 200px; }
+        a { text-decoration: none; color: inherit; }
     </style>
 </head>
 <body>
@@ -33,16 +34,20 @@
         </div>
 
         <div class="product" data-category="phone" data-name="smartphone">
-            <img src="images/phone.jpg" alt="Smartphone" width="150">
-            <h3>Smartphone</h3>
+            <a href="smartphone.html">
+                <img src="images/phone.jpg" alt="Smartphone" width="150">
+                <h3>Smartphone</h3>
+            </a>
             <p>Latest 5G smartphone with great features.</p>
             <p>20000rs</p>
             <button onclick="addToCart('Smartphone', 20000)">Add to Cart</button>
         </div>
 
         <div class="product" data-category="laptop" data-name="laptop">
-            <img src="images/Laptop/Laptop.jpg" alt="Laptop" width="150">
-            <h3>Laptop</h3>
+            <a href="laptop.html">
+                <img src="images/Laptop/Laptop.jpg" alt="Laptop" width="150">
+                <h3>Laptop</h3>
+            </a>
             <p>Powerful laptop with fast performance.</p>
             <p>40000rs</p>
             <button onclick="addToCart('Laptop', 40000)">Add to Cart</button>
@@ -93,3 +98,53 @@
     </script>
 </body>
 </html>
+
+<!-- Smartphone Page -->
+<!-- Save as smartphone.html -->
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smartphone - VISTORA</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        header { background: #2c3e50; color: white; padding: 20px; font-size: 24px; }
+    </style>
+</head>
+<body>
+    <header>Smartphone - Product Page</header>
+    <img src="images/phone.jpg" alt="Smartphone" width="200">
+    <h2>Smartphone</h2>
+    <p>Latest 5G smartphone with advanced camera, long battery life, and stunning display.</p>
+    <p>Price: 20000rs</p>
+    <button onclick="alert('Added to cart')">Add to Cart</button>
+</body>
+</html>
+-->
+
+<!-- Laptop Page -->
+<!-- Save as laptop.html -->
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laptop - VISTORA</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        header { background: #2c3e50; color: white; padding: 20px; font-size: 24px; }
+    </style>
+</head>
+<body>
+    <header>Laptop - Product Page</header>
+    <img src="images/Laptop/Laptop.jpg" alt="Laptop" width="200">
+    <h2>Laptop</h2>
+    <p>High-performance laptop with latest processor, 16GB RAM, and SSD storage.</p>
+    <p>Price: 40000rs</p>
+    <button onclick="alert('Added to cart')">Add to Cart</button>
+</body>
+</html>
+-->
