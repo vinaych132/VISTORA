@@ -4,240 +4,156 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>VISTORA - Online Shopping</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      text-align: center;
       background-color: #f4f4f4;
     }
-
-    header {
-      background: #2c3e50;
-      color: white;
-      padding: 20px;
-      font-size: 24px;
-    }
-
-    .container {
-      padding: 20px;
-    }
-
-    .products-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      justify-items: center;
-    }
-
-    .product {
-      width: 100%;
-      max-width: 250px;
-      padding: 20px;
-      border: 1px solid #ccc;
+    .product-card {
       background-color: white;
+      padding: 15px;
       border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+      text-align: center;
     }
-
-    .product:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    .product-card img {
+      max-width: 100%;
+      height: 150px;
+      object-fit: contain;
+      margin-bottom: 10px;
     }
-
-    .product img {
-      width: 150px;
-      height: auto;
-    }
-
-    button {
+    .filter-btns .btn {
       margin: 5px;
-      padding: 10px 20px;
-      cursor: pointer;
-      border: none;
-      background-color: #3498db;
-      color: white;
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
-    }
-
-    button:hover {
-      background-color: #2980b9;
-    }
-
-    .search-bar {
-      margin: 20px 0;
-    }
-
-    input[type="text"] {
-      padding: 10px;
-      width: 200px;
-    }
-
-    input[type="number"] {
-      width: 50px;
-    }
-
-    .cart {
-      margin-top: 40px;
-    }
-
-    .cart-item {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      margin: 5px 0;
-    }
-
-    .cart-item button {
-      padding: 2px 8px;
-      background-color: #e74c3c;
-    }
-
-    .cart-item button:hover {
-      background-color: #c0392b;
     }
   </style>
 </head>
 <body>
+  <nav class="navbar navbar-dark bg-dark">
+    <span class="navbar-brand mb-0 h1 mx-auto">VISTORA - Your Online Shopping Destination</span>
+  </nav>
 
-  <header>VISTORA - Your Online Shopping Destination</header>
-
-  <div class="container">
-    <h2>Featured Products</h2>
-
-    <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="Search products..." oninput="searchProducts()" />
+  <div class="container mt-4">
+    <h2 class="text-center mb-4">Featured Products</h2>
+    
+    <div class="text-center mb-3">
+      <input type="text" id="searchInput" placeholder="Search products..." class="form-control d-inline-block w-50 mb-2"/>
+      <div class="filter-btns">
+        <button class="btn btn-primary" onclick="filterProducts('All')">All</button>
+        <button class="btn btn-primary" onclick="filterProducts('Phones')">Phones</button>
+        <button class="btn btn-primary" onclick="filterProducts('Laptops')">Laptops</button>
+        <button class="btn btn-primary" onclick="filterProducts('Tablets')">Tablets</button>
+        <button class="btn btn-primary" onclick="filterProducts('Accessories')">Accessories</button>
+      </div>
     </div>
 
-    <div style="margin: 20px 0;">
-      <button onclick="filterProducts('all')">All</button>
-      <button onclick="filterProducts('phone')">Phones</button>
-      <button onclick="filterProducts('laptop')">Laptops</button>
-      <button onclick="filterProducts('tablet')">Tablets</button>
-      <button onclick="filterProducts('accessory')">Accessories</button>
-    </div>
+    <div class="row" id="product-list"></div>
 
-    <div class="products-container" id="productsContainer"></div>
-
-    <div class="cart">
-      <h2>Shopping Cart</h2>
-      <ul id="cart-list"></ul>
-      <p>Total: ₹<span id="total">0</span></p>
-      <a href="checkout.html"><button>Proceed to Checkout</button></a>
-      <button onclick="clearCart()">Clear Cart</button>
+    <h3 class="text-center mt-4">Shopping Cart</h3>
+    <p class="text-center">Total: ₹<span id="total">0</span></p>
+    <div class="text-center mb-4">
+      <button class="btn btn-success" onclick="checkout()">Proceed to Checkout</button>
+      <button class="btn btn-danger" onclick="clearCart()">Clear Cart</button>
     </div>
   </div>
 
   <script>
     const products = [
       {
-        name: "smartphones",
-        price: 20000,
+        name: "Smartphones",
+        category: "Phones",
         description: "Latest 5G smartphone with great features.",
-        category: "phone",
-        image: "https://vinaych132.github.io/VISTORA/images/phone.jpg",
-        id: "smartphones",
-        link: "smartphone.html"
+        price: 20000,
+        image: "images/smartphone.jpg"
       },
       {
-        name: "laptop",
-        price: 40000,
+        name: "Laptop",
+        category: "Laptops",
         description: "Powerful laptop with fast performance.",
-        category: "laptop",
-        image: "https://vinaych132.github.io/VISTORA/images/laptop.jpg",
-        id: "laptop",
-        link: "laptop.html"
+        price: 40000,
+        image: "images/laptop.jpg"
       },
       {
-        name: "tablet",
-        price: 15000,
+        name: "Tablet",
+        category: "Tablets",
         description: "Lightweight tablet with high-resolution display.",
-        category: "tablet",
-        image: "https://vinaych132.github.io/VISTORA/images/tablet.jpg",
-        id: "tablet"
+        price: 15000,
+        image: "images/tablet.jpg"
       },
       {
-        name: "headphones",
-        price: 3000,
+        name: "Headphones",
+        category: "Accessories",
         description: "Wireless noise-cancelling headphones.",
-        category: "accessory",
-        image: "https://vinaych132.github.io/VISTORA/images/headphone.jpg",
-        id: "headphones"
+        price: 3000,
+        image: "images/headphones.jpg"
       }
     ];
 
-    let total = 0;
+    let cartTotal = 0;
 
-    function addToCart(product, price, qtyId) {
-      const qty = parseInt(document.getElementById(qtyId).value) || 1;
-      const list = document.getElementById('cart-list');
-      for (let i = 0; i < qty; i++) {
-        const li = document.createElement('li');
-        li.className = 'cart-item';
-        li.innerHTML = `${product} - ₹${price} <button onclick="removeItem(this, ${price})">Remove</button>`;
-        list.appendChild(li);
-        total += price;
-      }
-      document.getElementById('total').textContent = total;
-    }
+    function displayProducts(filtered = "All") {
+      const list = document.getElementById("product-list");
+      list.innerHTML = "";
 
-    function removeItem(button, price) {
-      const li = button.parentElement;
-      li.remove();
-      total -= price;
-      document.getElementById('total').textContent = total;
-    }
+      const search = document.getElementById("searchInput").value.toLowerCase();
 
-    function clearCart() {
-      document.getElementById('cart-list').innerHTML = '';
-      total = 0;
-      document.getElementById('total').textContent = total;
+      products
+        .filter(p =>
+          (filtered === "All" || p.category === filtered) &&
+          (p.name.toLowerCase().includes(search) || p.description.toLowerCase().includes(search))
+        )
+        .forEach((prod, index) => {
+          const col = document.createElement("div");
+          col.className = "col-md-3";
+          col.innerHTML = `
+            <div class="product-card">
+              <img src="${prod.image}" alt="${prod.name}" onerror="handleBrokenImage(this)">
+              <h5><a href="#" class="text-primary font-weight-bold">${prod.name}</a></h5>
+              <p>${prod.description}</p>
+              <p>₹${prod.price.toLocaleString()}</p>
+              <div>
+                Qty: <input type="number" min="1" value="1" id="qty-${index}" style="width: 60px;" />
+              </div>
+              <button class="btn btn-primary mt-2" onclick="addToCart(${prod.price}, 'qty-${index}')">Add to Cart</button>
+            </div>
+          `;
+          list.appendChild(col);
+        });
     }
 
     function filterProducts(category) {
-      const allProducts = document.querySelectorAll('.product');
-      allProducts.forEach(product => {
-        const cat = product.getAttribute('data-category');
-        product.style.display = (category === 'all' || cat === category) ? 'block' : 'none';
-      });
+      displayProducts(category);
     }
 
-    function searchProducts() {
-      const input = document.getElementById('searchInput').value.toLowerCase();
-      const allProducts = document.querySelectorAll('.product');
-      allProducts.forEach(product => {
-        const name = product.getAttribute('data-name').toLowerCase();
-        product.style.display = name.includes(input) ? 'block' : 'none';
-      });
+    function addToCart(price, qtyId) {
+      const qty = parseInt(document.getElementById(qtyId).value);
+      if (qty > 0) {
+        cartTotal += price * qty;
+        document.getElementById("total").innerText = cartTotal.toLocaleString();
+      }
     }
 
-    function displayProducts() {
-      const container = document.getElementById('productsContainer');
-      products.forEach(prod => {
-        const div = document.createElement('div');
-        div.className = 'product';
-        div.setAttribute('data-category', prod.category);
-        div.setAttribute('data-name', prod.name.toLowerCase());
-
-        const content = `
-          ${prod.link ? `<a href="${prod.link}">` : ""}
-            <img src="${prod.image}" alt="${prod.name}" onerror="this.onerror=null; this.src='https://via.placeholder.com/150?text=Image+Not+Found';" />
-            <h3>${prod.name.charAt(0).toUpperCase() + prod.name.slice(1)}</h3>
-          ${prod.link ? `</a>` : ""}
-          <p>${prod.description}</p>
-          <p>₹${prod.price.toLocaleString()}</p>
-          <label>Qty: <input type="number" min="1" value="1" id="qty-${prod.id}" /></label><br />
-          <button onclick="addToCart('${prod.name}', ${prod.price}, 'qty-${prod.id}')">Add to Cart</button>
-        `;
-        div.innerHTML = content;
-        container.appendChild(div);
-      });
+    function checkout() {
+      if (cartTotal === 0) {
+        alert("Your cart is empty!");
+      } else {
+        alert(`Total amount ₹${cartTotal.toLocaleString()} - Proceeding to checkout...`);
+      }
     }
 
+    function clearCart() {
+      cartTotal = 0;
+      document.getElementById("total").innerText = "0";
+    }
+
+    function handleBrokenImage(img) {
+      img.onerror = null;
+      img.src = "https://via.placeholder.com/150?text=Image+Not+Found";
+    }
+
+    document.getElementById("searchInput").addEventListener("input", () => displayProducts());
+
+    // Initialize
     displayProducts();
   </script>
 </body>
