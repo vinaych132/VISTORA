@@ -1,160 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>VISTORA - Online Shopping</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
   <style>
     body {
+      font-family: Arial, sans-serif;
       background-color: #f4f4f4;
+      padding: 20px;
     }
-    .product-card {
+    .product {
       background-color: white;
-      padding: 15px;
       border-radius: 10px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      margin-bottom: 20px;
+      padding: 20px;
+      margin: 10px;
       text-align: center;
+      box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+      width: 200px;
+      display: inline-block;
+      vertical-align: top;
     }
-    .product-card img {
-      max-width: 100%;
-      height: 150px;
+    .product img {
+      width: 100%;
+      height: 120px;
       object-fit: contain;
-      margin-bottom: 10px;
     }
-    .filter-btns .btn {
-      margin: 5px;
+    button {
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .add-to-cart {
+      background-color: #007bff;
+      color: white;
+    }
+    .checkout {
+      background-color: green;
+      color: white;
+    }
+    .clear-cart {
+      background-color: red;
+      color: white;
     }
   </style>
 </head>
 <body>
-  <nav class="navbar navbar-dark bg-dark">
-    <span class="navbar-brand mb-0 h1 mx-auto">VISTORA - Your Online Shopping Destination</span>
-  </nav>
 
-  <div class="container mt-4">
-    <h2 class="text-center mb-4">Featured Products</h2>
-    
-    <div class="text-center mb-3">
-      <input type="text" id="searchInput" placeholder="Search products..." class="form-control d-inline-block w-50 mb-2"/>
-      <div class="filter-btns">
-        <button class="btn btn-primary" onclick="filterProducts('All')">All</button>
-        <button class="btn btn-primary" onclick="filterProducts('Phones')">Phones</button>
-        <button class="btn btn-primary" onclick="filterProducts('Laptops')">Laptops</button>
-        <button class="btn btn-primary" onclick="filterProducts('Tablets')">Tablets</button>
-        <button class="btn btn-primary" onclick="filterProducts('Accessories')">Accessories</button>
-      </div>
+  <h2>VISTORA</h2>
+  <input type="text" id="search" placeholder="Search products..." />
+  <div>
+    <button onclick="filterProducts('all')">All</button>
+    <button onclick="filterProducts('Phones')">Phones</button>
+    <button onclick="filterProducts('Laptops')">Laptops</button>
+    <button onclick="filterProducts('Tablets')">Tablets</button>
+    <button onclick="filterProducts('Accessories')">Accessories</button>
+  </div>
+
+  <div id="product-list">
+    <!-- Sample products -->
+    <div class="product" data-category="Phones">
+      <img src="https://via.placeholder.com/150" alt="Smartphone" />
+      <h3>Smartphones</h3>
+      <p>Latest 5G smartphone with great features.</p>
+      <p>₹20,000</p>
+      Qty: <input type="number" value="1" min="1" id="qty-phone" />
+      <br />
+      <button class="add-to-cart" onclick="addToCart('Smartphone', 20000, 'qty-phone')">Add to Cart</button>
     </div>
 
-    <div class="row" id="product-list"></div>
+    <div class="product" data-category="Laptops">
+      <img src="https://via.placeholder.com/150" alt="Laptop" />
+      <h3>Laptop</h3>
+      <p>Powerful laptop with fast performance.</p>
+      <p>₹40,000</p>
+      Qty: <input type="number" value="1" min="1" id="qty-laptop" />
+      <br />
+      <button class="add-to-cart" onclick="addToCart('Laptop', 40000, 'qty-laptop')">Add to Cart</button>
+    </div>
 
-    <h3 class="text-center mt-4">Shopping Cart</h3>
-    <p class="text-center">Total: ₹<span id="total">0</span></p>
-    <div class="text-center mb-4">
-      <button class="btn btn-success" onclick="checkout()">Proceed to Checkout</button>
-      <button class="btn btn-danger" onclick="clearCart()">Clear Cart</button>
+    <div class="product" data-category="Tablets">
+      <img src="https://via.placeholder.com/150" alt="Tablet" />
+      <h3>Tablet</h3>
+      <p>Lightweight tablet with high-resolution display.</p>
+      <p>₹15,000</p>
+      Qty: <input type="number" value="1" min="1" id="qty-tablet" />
+      <br />
+      <button class="add-to-cart" onclick="addToCart('Tablet', 15000, 'qty-tablet')">Add to Cart</button>
+    </div>
+
+    <div class="product" data-category="Accessories">
+      <img src="https://via.placeholder.com/150" alt="Headphones" />
+      <h3>Headphones</h3>
+      <p>Wireless noise-cancelling headphones.</p>
+      <p>₹3,000</p>
+      Qty: <input type="number" value="1" min="1" id="qty-headphones" />
+      <br />
+      <button class="add-to-cart" onclick="addToCart('Headphones', 3000, 'qty-headphones')">Add to Cart</button>
     </div>
   </div>
 
+  <hr />
+  <h3>Shopping Cart</h3>
+  <div id="cart-total">Total: ₹0</div>
+  <button class="checkout" onclick="checkout()">Proceed to Checkout</button>
+  <button class="clear-cart" onclick="clearCart()">Clear Cart</button>
+
   <script>
-    const products = [
-      {
-        name: "Smartphones",
-        category: "Phones",
-        description: "Latest 5G smartphone with great features.",
-        price: 20000,
-        image: "images/smartphone.jpg"
-      },
-      {
-        name: "Laptop",
-        category: "Laptops",
-        description: "Powerful laptop with fast performance.",
-        price: 40000,
-        image: "images/laptop.jpg"
-      },
-      {
-        name: "Tablet",
-        category: "Tablets",
-        description: "Lightweight tablet with high-resolution display.",
-        price: 15000,
-        image: "images/tablet.jpg"
-      },
-      {
-        name: "Headphones",
-        category: "Accessories",
-        description: "Wireless noise-cancelling headphones.",
-        price: 3000,
-        image: "images/headphones.jpg"
-      }
-    ];
+    let total = 0;
 
-    let cartTotal = 0;
-
-    function displayProducts(filtered = "All") {
-      const list = document.getElementById("product-list");
-      list.innerHTML = "";
-
-      const search = document.getElementById("searchInput").value.toLowerCase();
-
-      products
-        .filter(p =>
-          (filtered === "All" || p.category === filtered) &&
-          (p.name.toLowerCase().includes(search) || p.description.toLowerCase().includes(search))
-        )
-        .forEach((prod, index) => {
-          const col = document.createElement("div");
-          col.className = "col-md-3";
-          col.innerHTML = `
-            <div class="product-card">
-              <img src="${prod.image}" alt="${prod.name}" onerror="handleBrokenImage(this)">
-              <h5><a href="#" class="text-primary font-weight-bold">${prod.name}</a></h5>
-              <p>${prod.description}</p>
-              <p>₹${prod.price.toLocaleString()}</p>
-              <div>
-                Qty: <input type="number" min="1" value="1" id="qty-${index}" style="width: 60px;" />
-              </div>
-              <button class="btn btn-primary mt-2" onclick="addToCart(${prod.price}, 'qty-${index}')">Add to Cart</button>
-            </div>
-          `;
-          list.appendChild(col);
-        });
-    }
-
-    function filterProducts(category) {
-      displayProducts(category);
-    }
-
-    function addToCart(price, qtyId) {
+    function addToCart(product, price, qtyId) {
       const qty = parseInt(document.getElementById(qtyId).value);
-      if (qty > 0) {
-        cartTotal += price * qty;
-        document.getElementById("total").innerText = cartTotal.toLocaleString();
-      }
-    }
-
-    function checkout() {
-      if (cartTotal === 0) {
-        alert("Your cart is empty!");
-      } else {
-        alert(`Total amount ₹${cartTotal.toLocaleString()} - Proceeding to checkout...`);
-      }
+      total += price * qty;
+      document.getElementById("cart-total").innerText = `Total: ₹${total}`;
     }
 
     function clearCart() {
-      cartTotal = 0;
-      document.getElementById("total").innerText = "0";
+      total = 0;
+      document.getElementById("cart-total").innerText = "Total: ₹0";
     }
 
-    function handleBrokenImage(img) {
-      img.onerror = null;
-      img.src = "https://via.placeholder.com/150?text=Image+Not+Found";
+    function checkout() {
+      alert(`Total amount ₹${total} - Proceeding to checkout...`);
+      // Redirect to billing page
+      window.location.href = "billing.html";
     }
 
-    document.getElementById("searchInput").addEventListener("input", () => displayProducts());
-
-    // Initialize
-    displayProducts();
+    function filterProducts(category) {
+      const products = document.querySelectorAll('.product');
+      products.forEach(p => {
+        if (category === 'all' || p.dataset.category === category) {
+          p.style.display = 'inline-block';
+        } else {
+          p.style.display = 'none';
+        }
+      });
+    }
   </script>
 </body>
 </html>
