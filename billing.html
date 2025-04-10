@@ -27,8 +27,7 @@
       margin-top: 15px;
     }
     input[type="text"],
-    input[type="email"],
-    input[type="number"] {
+    input[type="email"] {
       width: 100%;
       padding: 10px;
       margin-top: 5px;
@@ -68,6 +67,8 @@
       <input type="radio" name="paymentMethod" value="card" checked onclick="togglePaymentFields()"> Card
       <input type="radio" name="paymentMethod" value="upi" onclick="togglePaymentFields()"> UPI
       <input type="radio" name="paymentMethod" value="netbanking" onclick="togglePaymentFields()"> Net Banking
+      <input type="radio" name="paymentMethod" value="paypal" onclick="togglePaymentFields()"> PayPal
+      <input type="radio" name="paymentMethod" value="cod" onclick="togglePaymentFields()"> Cash on Delivery
     </div>
 
     <div id="cardField">
@@ -85,6 +86,13 @@
       <input type="text" id="bankName" placeholder="Enter bank name">
     </div>
 
+    <div id="paypalField" style="display: none;">
+      <label>PayPal Email:</label>
+      <input type="email" id="paypalEmail" placeholder="your-paypal@example.com">
+    </div>
+
+    <!-- COD doesn't require extra fields -->
+
     <p><strong>Total Amount: ₹<span id="amount">0</span></strong></p>
 
     <button type="submit" class="submit-btn">Submit</button>
@@ -94,30 +102,35 @@
 <script>
   function togglePaymentFields() {
     const method = document.querySelector('input[name="paymentMethod"]:checked').value;
-    document.getElementById('cardField').style.display = method === 'card' ? 'block' : 'none';
-    document.getElementById('upiField').style.display = method === 'upi' ? 'block' : 'none';
-    document.getElementById('netBankingField').style.display = method === 'netbanking' ? 'block' : 'none';
+
+    document.getElementById('cardField').style.display = (method === 'card') ? 'block' : 'none';
+    document.getElementById('upiField').style.display = (method === 'upi') ? 'block' : 'none';
+    document.getElementById('netBankingField').style.display = (method === 'netbanking') ? 'block' : 'none';
+    document.getElementById('paypalField').style.display = (method === 'paypal') ? 'block' : 'none';
   }
 
-  function getSelectedPaymentValue() {
-    const method = document.querySelector('input[name="paymentMethod"]:checked').value;
-    if (method === 'card') return document.getElementById('cardNumber').value.trim();
-    if (method === 'upi') return document.getElementById('upiId').value.trim();
-    if (method === 'netbanking') return document.getElementById('bankName').value.trim();
-    return '';
+  function getSelectedPaymentValue(method) {
+    switch (method) {
+      case 'card': return document.getElementById('cardNumber').value.trim();
+      case 'upi': return document.getElementById('upiId').value.trim();
+      case 'netbanking': return document.getElementById('bankName').value.trim();
+      case 'paypal': return document.getElementById('paypalEmail').value.trim();
+      case 'cod': return "COD";
+      default: return "";
+    }
   }
 
   function submitBillingForm(event) {
     event.preventDefault();
-    
+
     const name = document.getElementById('name').value.trim();
     const address = document.getElementById('address').value.trim();
     const email = document.getElementById('email').value.trim();
     const amount = new URLSearchParams(window.location.search).get("amount") || 0;
     const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
-    const paymentValue = getSelectedPaymentValue();
+    const paymentDetail = getSelectedPaymentValue(paymentMethod);
 
-    if (!paymentValue) {
+    if (!paymentDetail) {
       alert("Please fill out the selected payment method field.");
       return false;
     }
@@ -131,7 +144,7 @@
         email,
         amount,
         payment_method: paymentMethod,
-        payment_detail: paymentValue
+        payment_detail: paymentDetail
       })
     })
     .then(res => res.json())
@@ -146,7 +159,6 @@
     return false;
   }
 
-  // Set amount from query param
   const amountParam = new URLSearchParams(window.location.search).get("amount");
   if (amountParam) document.getElementById("amount").innerText = amountParam;
 </script>
