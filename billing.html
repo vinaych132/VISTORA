@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Billing - VISTORA</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 40px;
+    }
+
+    .billing-form {
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 500px;
+      margin: auto;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .billing-form h2 {
+      margin-bottom: 20px;
+    }
+
+    .billing-form input, .billing-form select {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .billing-form button {
+      background-color: #28a745;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 16px;
+    }
+
+    .billing-form button:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="billing-form">
+    <h2>Billing Details</h2>
+    <form id="checkoutForm">
+      <input type="text" name="name" placeholder="Full Name" required />
+      <input type="email" name="email" placeholder="Email Address" required />
+      <input type="text" name="address" placeholder="Shipping Address" required />
+      <select name="payment" required>
+        <option value="">Select Payment Method</option>
+        <option value="credit_card">Credit Card</option>
+        <option value="debit_card">Debit Card</option>
+        <option value="upi">UPI</option>
+        <option value="cod">Cash on Delivery</option>
+      </select>
+      <button type="submit">Place Order</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("checkoutForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const formData = new FormData(this);
+      const data = {
+        name: formData.get("name"),
+        email: formData.get("email"),
+        address: formData.get("address"),
+        paymentMethod: formData.get("payment"),
+      };
+
+      alert("✅ Order placed! Thank you, " + data.name);
+
+      // Optional: send event to Flask server
+      fetch("http://127.0.0.1:5000/track", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          eventType: "order_placed",
+          data: data
+        })
+      }).catch(err => console.log("Error sending tracking event:", err));
+    });
+  </script>
+
+</body>
+</html>
