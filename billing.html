@@ -1,94 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Billing Details - VISTORA</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 30px;
-            background-color: #f5f5f5;
-        }
-
-        h1 {
-            color: #333;
-        }
-
-        form {
-            background-color: white;
-            padding: 25px;
-            border-radius: 10px;
-            max-width: 500px;
-            margin: auto;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-
-        label {
-            display: block;
-            margin-top: 15px;
-        }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
-        button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: green;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        #amountDisplay {
-            margin-top: 10px;
-            font-weight: bold;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Billing</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+    }
+    .container {
+      max-width: 500px;
+      margin: 60px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 15px;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .payment-option {
+      margin-top: 10px;
+    }
+    .submit-btn {
+      background-color: green;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
 
-    <h1>Billing Details</h1>
-    <form id="billingForm">
-        <label for="name">Full Name:</label>
-        <input type="text" id="name" required>
+<div class="container">
+  <h2>Billing Details</h2>
+  <form id="billingForm" onsubmit="return submitBillingForm(event)">
+    <label>Full Name:</label>
+    <input type="text" id="name" required>
 
-        <label for="address">Address:</label>
-        <input type="text" id="address" required>
+    <label>Address:</label>
+    <input type="text" id="address" required>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" required>
+    <label>Email:</label>
+    <input type="email" id="email" required>
 
-        <label for="card">Card Number:</label>
-        <input type="text" id="card" required>
+    <label>Payment Method:</label>
+    <div class="payment-option">
+      <input type="radio" name="paymentMethod" value="card" checked onclick="togglePaymentFields()"> Card
+      <input type="radio" name="paymentMethod" value="upi" onclick="togglePaymentFields()"> UPI
+      <input type="radio" name="paymentMethod" value="netbanking" onclick="togglePaymentFields()"> Net Banking
+    </div>
 
-        <div id="amountDisplay"></div>
+    <div id="cardField">
+      <label>Card Number:</label>
+      <input type="text" id="cardNumber" placeholder="Enter card number">
+    </div>
 
-        <button type="submit">Submit</button>
-    </form>
+    <div id="upiField" style="display: none;">
+      <label>UPI ID:</label>
+      <input type="text" id="upiId" placeholder="example@upi">
+    </div>
 
-    <script>
-        // Show total from URL
-        const params = new URLSearchParams(window.location.search);
-        const amount = params.get('amount') || 0;
-        document.getElementById('amountDisplay').textContent = `Total Amount: ₹${amount}`;
+    <div id="netBankingField" style="display: none;">
+      <label>Bank Name:</label>
+      <input type="text" id="bankName" placeholder="Enter bank name">
+    </div>
 
-        // Handle form submission
-        document.getElementById('billingForm').addEventListener('submit', function (e) {
-            e.preventDefault();
+    <p><strong>Total Amount: ₹<span id="amount">0</span></strong></p>
 
-            // Optionally validate form inputs here...
+    <button type="submit" class="submit-btn">Submit</button>
+  </form>
+</div>
 
-            alert("Payment Successful! Redirecting to success page...");
-            window.location.href = "success.html";
-        });
-    </script>
+<script>
+  function togglePaymentFields() {
+    const method = document.querySelector('input[name="paymentMethod"]:checked').value;
+    document.getElementById('cardField').style.display = method === 'card' ? 'block' : 'none';
+    document.getElementById('upiField').style.display = method === 'upi' ? 'block' : 'none';
+    document.getElementById('netBankingField').style.display = method === 'netbanking' ? 'block' : 'none';
+  }
+
+  function getSelectedPaymentValue() {
+    const method = document.querySelector('input[name="paymentMethod"]:checked').value;
+    if (method === 'card') return document.getElementById('cardNumber').value.trim();
+    if (method === 'upi') return document.getElementById('upiId').value.trim();
+    if (method === 'netbanking') return document.getElementById('bankName').value.trim();
+    return '';
+  }
+
+  function submitBillingForm(event) {
+    event.preventDefault();
+    
+    const name = document.getElementById('name').value.trim();
+    const address = document.getElementById('address').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const amount = new URLSearchParams(window.location.search).get("amount") || 0;
+    const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+    const paymentValue = getSelectedPaymentValue();
+
+    if (!paymentValue) {
+      alert("Please fill out the selected payment method field.");
+      return false;
+    }
+
+    fetch("http://localhost:5000/billing", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name,
+        address,
+        email,
+        amount,
+        payment_method: paymentMethod,
+        payment_detail: paymentValue
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.status === "billing saved") {
+        window.location.href = "success.html";
+      } else {
+        alert("Payment failed. Please try again.");
+      }
+    });
+
+    return false;
+  }
+
+  // Set amount from query param
+  const amountParam = new URLSearchParams(window.location.search).get("amount");
+  if (amountParam) document.getElementById("amount").innerText = amountParam;
+</script>
 
 </body>
 </html>
