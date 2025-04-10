@@ -111,3 +111,116 @@
 
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Billing - VISTORA</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background-color: #f4f4f4;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+
+    input[type="text"], input[type="email"], input[type="number"] {
+      width: 250px;
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    .payment-option {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .payment-option img {
+      margin-right: 10px;
+      width: 40px;
+      height: auto;
+    }
+
+    .submit-button {
+      margin-top: 20px;
+      padding: 10px 24px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .submit-button:hover {
+      background-color: #218838;
+    }
+  </style>
+  <script>
+    function handleStaticSubmit(event) {
+      event.preventDefault();
+      // Simulate billing submit and redirect to success page
+      setTimeout(() => {
+        window.location.href = "success.html";
+      }, 1000);
+    }
+  </script>
+</head>
+<body>
+
+  <h1>Billing Details</h1>
+
+  <form onsubmit="handleStaticSubmit(event)">
+    <label>Full Name:
+      <input type="text" name="fullname" required>
+    </label>
+
+    <label>Address:
+      <input type="text" name="address" required>
+    </label>
+
+    <label>Email:
+      <input type="email" name="email" required>
+    </label>
+
+    <label>Card Number:
+      <input type="text" name="card_number" required>
+    </label>
+
+    <label>Payment Method:</label>
+
+    <div class="payment-option">
+      <input type="radio" name="payment_method" value="Visa" required>
+      <img src="assets/icons/visa.png" alt="Visa Icon"> Visa
+    </div>
+
+    <div class="payment-option">
+      <input type="radio" name="payment_method" value="PayPal">
+      <img src="assets/icons/paypal.png" alt="PayPal Icon"> PayPal
+    </div>
+
+    <div class="payment-option">
+      <input type="radio" name="payment_method" value="Cash on Delivery">
+      <img src="assets/icons/cod.png" alt="COD Icon"> Cash on Delivery
+    </div>
+
+    <label>Total Amount:
+      <input type="text" name="amount" value="₹20000" readonly>
+    </label>
+
+    <button type="submit" class="submit-button">Submit</button>
+  </form>
+
+</body>
+</html>
