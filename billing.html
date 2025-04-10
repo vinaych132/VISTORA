@@ -75,17 +75,17 @@
 
     <div class="payment-option">
         <input type="radio" name="payment_method" value="Visa" required>
-        <img src="assets/icons/visa.png" alt="Visa"> Visa
+        <img src="{{ url_for('static', filename='assets/icons/visa.png') }}" alt="Visa"> Visa
     </div>
 
     <div class="payment-option">
         <input type="radio" name="payment_method" value="PayPal">
-        <img src="assets/icons/paypal.png" alt="PayPal"> PayPal
+        <img src="{{ url_for('static', filename='assets/icons/paypal.png') }}" alt="PayPal"> PayPal
     </div>
 
     <div class="payment-option">
         <input type="radio" name="payment_method" value="Cash on Delivery">
-        <img src="assets/icons/cod.png" alt="Cash on Delivery"> Cash on Delivery
+        <img src="{{ url_for('static', filename='assets/icons/cod.png') }}" alt="Cash on Delivery"> Cash on Delivery
     </div>
 
     <label>Total Amount:
