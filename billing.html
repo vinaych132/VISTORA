@@ -1,36 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Billing - VISTORA</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       padding: 30px;
-      background-color: #f4f4f4;
+      margin: 0;
+      background: url('assets/Images/optimized_background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+    }
+
+    .billing-container {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 30px;
+      border-radius: 12px;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     }
 
     h1 {
       font-size: 28px;
       font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
     }
 
     label {
       display: block;
-      margin-top: 10px;
+      margin-top: 12px;
+      font-weight: 500;
     }
 
-    input[type="text"], input[type="email"], input[type="number"] {
-      width: 250px;
-      padding: 8px;
-      border-radius: 4px;
+    input[type="text"],
+    input[type="email"],
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
       border: 1px solid #ccc;
+      box-sizing: border-box;
+      margin-top: 6px;
     }
 
     .payment-option {
       display: flex;
       align-items: center;
-      margin-top: 10px;
+      margin-top: 12px;
     }
 
     .payment-option img {
@@ -40,24 +59,25 @@
     }
 
     .submit-button {
-      margin-top: 20px;
-      padding: 10px 24px;
+      margin-top: 24px;
+      padding: 12px 28px;
       background-color: #28a745;
       color: white;
       border: none;
       border-radius: 6px;
       font-size: 16px;
       cursor: pointer;
+      width: 100%;
     }
 
     .submit-button:hover {
       background-color: #218838;
     }
   </style>
+
   <script>
     function handleStaticSubmit(event) {
       event.preventDefault();
-      // Simulate billing submit and redirect to success page
       setTimeout(() => {
         window.location.href = "success.html";
       }, 1000);
@@ -66,44 +86,50 @@
 </head>
 <body>
 
-  <h1>Billing Details</h1>
+  <div class="billing-container">
+    <h1>Billing Details</h1>
 
-  <form onsubmit="handleStaticSubmit(event)">
-    <label>Full Name:
-      <input type="text" name="fullname" required>
-    </label>
+    <form onsubmit="handleStaticSubmit(event)">
+      <label>Full Name:
+        <input type="text" name="fullname" required />
+      </label>
 
-    <label>Address:
-      <input type="text" name="address" required>
-    </label>
+      <label>Address:
+        <input type="text" name="address" required />
+      </label>
 
-    <label>Email:
-      <input type="email" name="email" required>
-    </label>
+      <label>Email:
+        <input type="email" name="email" required />
+      </label>
 
-    <label>Payment Method:</label>
+      <label>Card Number:
+        <input type="text" name="card_number" required />
+      </label>
 
-    <div class="payment-option">
-      <input type="radio" name="payment_method" value="Visa" required>
-      <img src="assets/icons/visa.png" alt="Visa Icon"> Visa
-    </div>
+      <label>Payment Method:</label>
 
-    <div class="payment-option">
-      <input type="radio" name="payment_method" value="PayPal">
-      <img src="assets/icons/paypal.png" alt="PayPal Icon"> PayPal
-    </div>
+      <div class="payment-option">
+        <input type="radio" name="payment_method" value="Visa" required />
+        <img src="assets/icons/visa.png" alt="Visa Icon" /> Visa
+      </div>
 
-    <div class="payment-option">
-      <input type="radio" name="payment_method" value="Cash on Delivery">
-      <img src="assets/icons/cod.png" alt="COD Icon"> Cash on Delivery
-    </div>
+      <div class="payment-option">
+        <input type="radio" name="payment_method" value="PayPal" />
+        <img src="assets/icons/paypal.png" alt="PayPal Icon" /> PayPal
+      </div>
 
-    <label>Total Amount:
-      <input type="text" name="amount" value="₹20000" readonly>
-    </label>
+      <div class="payment-option">
+        <input type="radio" name="payment_method" value="Cash on Delivery" />
+        <img src="assets/icons/cod.png" alt="COD Icon" /> Cash on Delivery
+      </div>
 
-    <button type="submit" class="submit-button">Submit</button>
-  </form>
+      <label>Total Amount:
+        <input type="text" name="amount" value="₹20000" readonly />
+      </label>
+
+      <button type="submit" class="submit-button">Submit</button>
+    </form>
+  </div>
 
 </body>
 </html>
