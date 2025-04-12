@@ -1,115 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Billing - VISTORA</title>
+  <meta charset="UTF-8">
+  <title>Billing | Vistora</title>
   <style>
     body {
-      background-color: #111;
-      color: #f0f0f0;
       font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
+      background: #f2f2f2;
+      padding: 20px;
     }
 
-    .container {
-      max-width: 500px;
-      margin: 60px auto;
-      background-color: #1e1e1e;
-      padding: 30px;
-      border-radius: 8px;
-      box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
-    }
-
-    h2 {
+    h1 {
       text-align: center;
-      margin-bottom: 25px;
-      color: #ff3c3c;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+      color: #333;
     }
 
-    label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: bold;
-      margin-top: 15px;
+    form {
+      max-width: 400px;
+      margin: 0 auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
 
     input[type="text"],
     input[type="number"] {
       width: 100%;
       padding: 10px;
-      border-radius: 5px;
-      border: none;
-      background-color: #333;
-      color: #fff;
-      font-size: 1rem;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
     }
 
     button {
       width: 100%;
-      padding: 12px;
-      margin-top: 25px;
-      background-color: #ff3c3c;
-      color: #fff;
-      font-size: 1rem;
+      padding: 10px;
+      background-color: #28a745;
       border: none;
-      border-radius: 5px;
+      color: white;
+      font-weight: bold;
       cursor: pointer;
-      text-transform: uppercase;
+      border-radius: 4px;
     }
 
     button:hover {
-      background-color: #e60000;
+      background-color: #218838;
     }
 
     .message {
-      margin-top: 20px;
       text-align: center;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 30px;
+      border-collapse: collapse;
+      background: white;
+    }
+
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #007bff;
+      color: white;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h2>Billing Information</h2>
-    <form id="billing-form">
-      <label for="name">Full Name</label>
-      <input type="text" id="name" name="name" required />
 
-      <label for="amount">Amount (₹)</label>
-      <input type="number" id="amount" name="amount" required />
+<h1>Vistora Billing Page</h1>
 
-      <button type="submit">Submit Billing</button>
-    </form>
+<form id="billing-form">
+  <label for="name">Customer Name</label>
+  <input type="text" id="name" name="name" required>
 
-    <div class="message" id="message"></div>
-  </div>
+  <label for="amount">Amount</label>
+  <input type="number" id="amount" name="amount" step="0.01" required>
 
-  <script>
-    const form = document.getElementById('billing-form');
-    const messageBox = document.getElementById('message');
+  <button type="submit">Submit Order</button>
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
+  <div class="message" id="message"></div>
+</form>
 
-      const formData = new FormData(form);
+{% if entries %}
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Amount (₹)</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for entry in entries %}
+    <tr>
+      <td>{{ entry[0] }}</td>
+      <td>{{ "%.2f"|format(entry[1]) }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
 
+<script>
+  const form = document.getElementById('billing-form');
+  const messageBox = document.getElementById('message');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+
+    try {
       const response = await fetch('/submit-billing', {
         method: 'POST',
         body: formData
       });
-
       const result = await response.json();
-
       messageBox.textContent = result.message;
-      messageBox.style.color = result.status === "success" ? "#0f0" : "#f00";
+      messageBox.style.color = result.status === "success" ? "#28a745" : "#dc3545";
 
       if (result.status === "success") {
         form.reset();
+        setTimeout(() => window.location.reload(), 1000);
       }
-    });
-  </script>
+    } catch (error) {
+      messageBox.textContent = "Failed to submit!";
+      messageBox.style.color = "#dc3545";
+    }
+  });
+</script>
+
 </body>
 </html>
