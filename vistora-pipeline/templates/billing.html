@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Billing - VISTORA</title>
+  <style>
+    body {
+      background-color: #111;
+      color: #f0f0f0;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 60px auto;
+      background-color: #1e1e1e;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #ff3c3c;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      background-color: #333;
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 25px;
+      background-color: #ff3c3c;
+      color: #fff;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+
+    button:hover {
+      background-color: #e60000;
+    }
+
+    .message {
+      margin-top: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Billing Information</h2>
+    <form id="billing-form">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="amount">Amount (₹)</label>
+      <input type="number" id="amount" name="amount" required />
+
+      <button type="submit">Submit Billing</button>
+    </form>
+
+    <div class="message" id="message"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById('billing-form');
+    const messageBox = document.getElementById('message');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+
+      const response = await fetch('/submit-billing', {
+        method: 'POST',
+        body: formData
+      });
+
+      const result = await response.json();
+
+      messageBox.textContent = result.message;
+      messageBox.style.color = result.status === "success" ? "#0f0" : "#f00";
+
+      if (result.status === "success") {
+        form.reset();
+      }
+    });
+  </script>
+</body>
+</html>
