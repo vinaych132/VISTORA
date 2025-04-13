@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>T-Shirts - VISTORA</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <header>
+    <h1>VISTORA</h1>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/tshirts" class="active">T-Shirts</a>
+      <a href="/trackpants">Track Pants</a>
+      <a href="/caps">Caps</a>
+      <a href="/hoodies">Hoodies</a>
+      <a href="/underwear">Underwear</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>T-Shirts Collection</h2>
+    <div class="product-grid">
+      <!-- Repeat this product card -->
+      <div class="product-card">
+        <img src="{{ url_for('static', filename='images/tshirt1.jpg') }}" alt="T-Shirt 1">
+        <h3>Classic White T-Shirt</h3>
+        <p>₹499</p>
+        <button>Add to Cart</button>
+      </div>
+
+      <div class="product-card">
+        <img src="{{ url_for('static', filename='images/tshirt2.jpg') }}" alt="T-Shirt 2">
+        <h3>Graphic Black Tee</h3>
+        <p>₹799</p>
+        <button>Add to Cart</button>
+      </div>
+
+      <div class="product-card">
+        <img src="{{ url_for('static', filename='images/tshirt3.jpg') }}" alt="T-Shirt 3">
+        <h3>Street Style Maroon</h3>
+        <p>₹899</p>
+        <button>Add to Cart</button>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
