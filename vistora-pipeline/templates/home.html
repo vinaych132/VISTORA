@@ -4,29 +4,128 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VISTORA - Home</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding-top: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #007bff;
+        }
+
+        .category-card {
+            margin: 20px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: white;
+            transition: transform 0.3s;
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .category-card:hover {
+            transform: scale(1.05);
+        }
+
+        .category-card h5 {
+            font-size: 1.25rem;
+            margin-top: 15px;
+            color: #333;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+            margin-top: 40px;
+        }
+
+        .category-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .category-container .col-md-3 {
+            margin-bottom: 30px;
+        }
+    </style>
 </head>
 <body>
     <header>
         <h1>Welcome to VISTORA</h1>
-        <nav>
-            <ul>
-                <li><a href="{{ url_for('tshirts') }}">T-Shirts</a></li>
-                <li><a href="{{ url_for('trackpants') }}">Track Pants</a></li>
-                <li><a href="{{ url_for('caps') }}">Caps</a></li>
-                <li><a href="{{ url_for('hoodies') }}">Hoodies</a></li>
-                <li><a href="{{ url_for('underwear') }}">Underwear</a></li>
-            </ul>
-        </nav>
+        <p>Explore our collection of products</p>
     </header>
 
-    <section>
-        <h2>Shop by Category</h2>
-        <p>Select a category to explore our collection of products!</p>
-    </section>
+    <div class="container category-container">
+        <div class="col-md-3">
+            <a href="{{ url_for('tshirts') }}">
+                <div class="category-card">
+                    <img src="tshirt_image.jpg" alt="T-Shirts">
+                    <h5>T-Shirts</h5>
+                </div>
+            </a>
+        </div>
 
-    <footer>
+        <div class="col-md-3">
+            <a href="{{ url_for('trackpants') }}">
+                <div class="category-card">
+                    <img src="trackpants_image.jpg" alt="Track Pants">
+                    <h5>Track Pants</h5>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-3">
+            <a href="{{ url_for('caps') }}">
+                <div class="category-card">
+                    <img src="caps_image.jpg" alt="Caps">
+                    <h5>Caps</h5>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-3">
+            <a href="{{ url_for('hoodies') }}">
+                <div class="category-card">
+                    <img src="hoodies_image.jpg" alt="Hoodies">
+                    <h5>Hoodies</h5>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-3">
+            <a href="{{ url_for('underwear') }}">
+                <div class="category-card">
+                    <img src="underwear_image.jpg" alt="Underwear">
+                    <h5>Underwear</h5>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <footer class="footer">
         <p>&copy; 2025 VISTORA. All rights reserved.</p>
     </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
