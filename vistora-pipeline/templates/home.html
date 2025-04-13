@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VISTORA - Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to VISTORA</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('tshirts') }}">T-Shirts</a></li>
+                <li><a href="{{ url_for('trackpants') }}">Track Pants</a></li>
+                <li><a href="{{ url_for('caps') }}">Caps</a></li>
+                <li><a href="{{ url_for('hoodies') }}">Hoodies</a></li>
+                <li><a href="{{ url_for('underwear') }}">Underwear</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        <h2>Shop by Category</h2>
+        <p>Select a category to explore our collection of products!</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 VISTORA. All rights reserved.</p>
+    </footer>
+</body>
+</html>
