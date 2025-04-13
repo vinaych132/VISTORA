@@ -9,27 +9,21 @@
 <body>
     <div class="container">
         <h1>Welcome to VISTORA</h1>
-        <p>Discover our great range of products!</p>
+        <p>Explore our wide range of products</p>
 
-        <!-- Display product catalog -->
         <div class="row">
-            {% for product in products %}
+            {% for category in categories %}
                 <div class="col-md-4">
                     <div class="card">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="{{ product.name }}">
+                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="{{ category }}">
                         <div class="card-body">
-                            <h5 class="card-title">{{ product.name }}</h5>
-                            <p class="card-text">{{ product.description }}</p>
-                            <p class="card-text"><strong>${{ product.price }}</strong></p>
-                            <a href="{{ url_for('billing') }}" class="btn btn-primary">Add to Cart</a>
+                            <h5 class="card-title">{{ category.replace('-', ' ').title() }}</h5>
+                            <a href="{{ url_for('category_page', category_name=category) }}" class="btn btn-primary">Shop Now</a>
                         </div>
                     </div>
                 </div>
             {% endfor %}
         </div>
-
-        <!-- Link to proceed to checkout -->
-        <a href="{{ url_for('checkout') }}" class="btn btn-primary mt-3">Proceed to Checkout</a>
     </div>
 </body>
 </html>
