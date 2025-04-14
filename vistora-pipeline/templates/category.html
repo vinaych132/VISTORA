@@ -1,32 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VISTORA - {{ category_name.replace('-', ' ').title() }}</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <meta charset="UTF-8">
+  <title>{{ category_name | capitalize }} - Vistora</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h1>{{ category_name.replace('-', ' ').title() }}</h1>
+  <header>
+    <h1>Vistora</h1>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/category/{{ category_name }}" class="active">{{ category_name | capitalize }}</a>
+    </nav>
+  </header>
 
-        <div class="row">
-            {% for product in products %}
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="{{ product.name }}">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ product.name }}</h5>
-                            <p class="card-text">{{ product.description }}</p>
-                            <p class="card-text"><strong>${{ product.price }}</strong></p>
-                            <a href="{{ url_for('billing') }}" class="btn btn-primary">Add to Cart</a>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
+  <main>
+    <h2>{{ category_name | capitalize }}</h2>
 
-        <a href="{{ url_for('home') }}" class="btn btn-secondary mt-3">Back to Home</a>
+    <!-- Category Images (Based on the category passed) -->
+    <div class="category-images">
+      <img src="{{ url_for('static', filename='images/' + category_name + '.jpg') }}" alt="{{ category_name }}">
     </div>
+  </main>
 </body>
 </html>

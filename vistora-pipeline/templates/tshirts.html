@@ -1,48 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>T-Shirts - VISTORA</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T-Shirts | VISTORA</title> <!-- Correct title for the T-shirts category -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <h1>VISTORA</h1>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/tshirts" class="active">T-Shirts</a>
-      <a href="/trackpants">Track Pants</a>
-      <a href="/caps">Caps</a>
-      <a href="/hoodies">Hoodies</a>
-      <a href="/underwear">Underwear</a>
-    </nav>
-  </header>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="VISTORA Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li> <!-- Home link -->
+                <li><a href="/category/t-shirts">T-Shirts</a></li> <!-- T-shirts category link -->
+                <li><a href="#">Shop</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <main>
-    <h2>T-Shirts Collection</h2>
-    <div class="product-grid">
-      <!-- Repeat this product card -->
-      <div class="product-card">
-        <img src="{{ url_for('static', filename='images/tshirt1.jpg') }}" alt="T-Shirt 1">
-        <h3>Classic White T-Shirt</h3>
-        <p>₹499</p>
-        <button>Add to Cart</button>
-      </div>
+    <div class="category-page">
+        <!-- Optional Breadcrumb (Home > T-Shirts) -->
+        <div class="breadcrumb">
+            <a href="/">Home</a> > <a href="/category/t-shirts">T-Shirts</a>
+        </div>
 
-      <div class="product-card">
-        <img src="{{ url_for('static', filename='images/tshirt2.jpg') }}" alt="T-Shirt 2">
-        <h3>Graphic Black Tee</h3>
-        <p>₹799</p>
-        <button>Add to Cart</button>
-      </div>
+        <h1>T-Shirts</h1> <!-- Clear category heading -->
 
-      <div class="product-card">
-        <img src="{{ url_for('static', filename='images/tshirt3.jpg') }}" alt="T-Shirt 3">
-        <h3>Street Style Maroon</h3>
-        <p>₹899</p>
-        <button>Add to Cart</button>
-      </div>
+        <p>Explore our stylish collection of T-shirts, perfect for every occasion.</p>
+
+        <div class="category-image-container">
+            <img src="t-shirts-category-image.jpg" alt="T-Shirts">
+        </div>
+
+        <!-- Category products can be listed here -->
     </div>
-  </main>
+
+    <footer>
+        <p>&copy; 2025 VISTORA. All rights reserved.</p>
+    </footer>
 </body>
 </html>

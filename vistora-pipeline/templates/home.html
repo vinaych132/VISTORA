@@ -1,57 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vistora - Home</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <meta charset="UTF-8">
+  <title>Vistora | Home</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <header>
-        <h1>Welcome to Vistora</h1>
-        <nav>
-            <a href="/" class="active">Home</a>
-            <a href="/tshirts">T-Shirts</a>
-            <a href="/trackpants">Track Pants</a>
-            <a href="/caps">Caps</a>
-            <a href="/hoodies">Hoodies</a>
-            <a href="/underwear">Underwear</a>
-        </nav>
-    </header>
+  <header>
+    <h1>Vistora</h1>
+    <nav>
+      <a href="/" class="active">Home</a>
+    </nav>
+  </header>
 
-    <main>
-        <h2>Browse Categories</h2>
-        <div class="product-grid">
-            <div class="product-card">
-                <img src="path_to_image/tshirt.jpg" alt="T-Shirts">
-                <h3>T-Shirts</h3>
-                <a href="/tshirts"><button>Shop Now</button></a>
-            </div>
+  <main>
+<section class="category-section">
+  <div class="category-grid">
+    <a href="/category/tshirts" class="category-card">T-Shirts</a>
+    <a href="/category/trackpants" class="category-card">Track Pants</a>
+    <a href="/category/caps" class="category-card">Caps</a>
+    <a href="/category/hoodies" class="category-card">Hoodies</a>
+    <a href="/category/underwear" class="category-card">Underwear</a>
+  </div>
+</section>
 
-            <div class="product-card">
-                <img src="path_to_image/trackpants.jpg" alt="Track Pants">
-                <h3>Track Pants</h3>
-                <a href="/trackpants"><button>Shop Now</button></a>
-            </div>
-
-            <div class="product-card">
-                <img src="path_to_image/caps.jpg" alt="Caps">
-                <h3>Caps</h3>
-                <a href="/caps"><button>Shop Now</button></a>
-            </div>
-
-            <div class="product-card">
-                <img src="path_to_image/hoodies.jpg" alt="Hoodies">
-                <h3>Hoodies</h3>
-                <a href="/hoodies"><button>Shop Now</button></a>
-            </div>
-
-            <div class="product-card">
-                <img src="path_to_image/underwear.jpg" alt="Underwear">
-                <h3>Underwear</h3>
-                <a href="/underwear"><button>Shop Now</button></a>
-            </div>
-        </div>
-    </main>
+<div class="category-grid">
+  {% for category in categories %}
+    <div class="category-card">
+      <img src="{{ url_for('static', filename='images/' + category.image) }}" alt="{{ category.name }}">
+      <h3>{{ category.name }}</h3>
+    </div>
+  {% endfor %}
+</div>
+    </div>
+  </main>
 </body>
 </html>
+
+<script>
+function filterCategories() {
+  const input = document.getElementById('searchInput').value.toLowerCase();
+  const cards = document.querySelectorAll('.category-card');
+
+  cards.forEach(card => {
+    const name = card.querySelector('h3').textContent.toLowerCase();
+    card.style.display = name.includes(input) ? 'block' : 'none';
+  });
+}
+</script>
