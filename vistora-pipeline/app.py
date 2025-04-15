@@ -25,3 +25,6 @@ def home():
         {'name': 'Underwear', 'image': 'underwear.jpg'}
     ]
     return render_template("home.html", categories=categories)
+@app.route('/billing')
+def billing():
+    return render_template('billing.html')
