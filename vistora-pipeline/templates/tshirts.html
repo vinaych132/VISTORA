@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>T-Shirts | VISTORA</title> <!-- Correct title for the T-shirts category -->
-    <link rel="stylesheet" href="styles.css">
+    <title>T-Shirts | VISTORA</title>
+    <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
     <header>
         <div class="logo">
-            <img src="logo.png" alt="VISTORA Logo">
+            <img src="/static/logo.png" alt="VISTORA Logo">
         </div>
         <nav>
             <ul>
-                <li><a href="/">Home</a></li> <!-- Home link -->
-                <li><a href="/category/t-shirts">T-Shirts</a></li> <!-- T-shirts category link -->
+                <li><a href="/">Home</a></li>
+                <li><a href="/category/tshirts">T-Shirts</a></li>
                 <li><a href="#">Shop</a></li>
                 <li><a href="#">About</a></li>
                 <li><a href="#">Contact</a></li>
@@ -22,22 +22,38 @@
         </nav>
     </header>
 
-    <div class="category-page">
-        <!-- Optional Breadcrumb (Home > T-Shirts) -->
+    <main class="category-page">
         <div class="breadcrumb">
-            <a href="/">Home</a> > <a href="/category/t-shirts">T-Shirts</a>
+            <a href="/">Home</a> > T-Shirts
         </div>
+        <h1>T-Shirts</h1>
 
-        <h1>T-Shirts</h1> <!-- Clear category heading -->
+        <div class="product-grid">
+            <!-- Example Product -->
+            <div class="product-card">
+                <img src="/static/products/tshirt1.jpg" alt="T-Shirt 1">
+                <h3>Classic White Tee</h3>
+                <p>$19.99</p>
+                <button>Add to Cart</button>
+            </div>
 
-        <p>Explore our stylish collection of T-shirts, perfect for every occasion.</p>
+            <div class="product-card">
+                <img src="/static/products/tshirt2.jpg" alt="T-Shirt 2">
+                <h3>Black Graphic Tee</h3>
+                <p>$24.99</p>
+                <button>Add to Cart</button>
+            </div>
 
-        <div class="category-image-container">
-            <img src="t-shirts-category-image.jpg" alt="T-Shirts">
+            <div class="product-card">
+                <img src="/static/products/tshirt3.jpg" alt="T-Shirt 3">
+                <h3>Striped Oversized Tee</h3>
+                <p>$29.99</p>
+                <button>Add to Cart</button>
+            </div>
+
+            <!-- Add more as needed -->
         </div>
-
-        <!-- Category products can be listed here -->
-    </div>
+    </main>
 
     <footer>
         <p>&copy; 2025 VISTORA. All rights reserved.</p>
