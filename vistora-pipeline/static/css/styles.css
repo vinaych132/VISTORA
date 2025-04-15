@@ -113,3 +113,40 @@ footer {
     padding: 1rem;
     margin-top: 2rem;
 }
+
+.hero {
+    position: relative;
+    background: url('/static/images/hero-bg.jpg') no-repeat center center/cover;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.hero-overlay {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    color: #fff;
+}
+
+.hero-overlay h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.hero-btn {
+    background-color: #f39c12;
+    padding: 0.75rem 1.5rem;
+    border-radius: 30px;
+    color: #000;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.hero-btn:hover {
+    background-color: #fff;
+    color: #f39c12;
+}
