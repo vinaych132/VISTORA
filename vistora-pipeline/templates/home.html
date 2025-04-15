@@ -1,50 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Vistora | Home</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <meta charset="UTF-8">
+    <title>Vistora | Home</title>
+    <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
-  <header>
-    <h1>Vistora</h1>
-    <nav>
-      <a href="/" class="active">Home</a>
-    </nav>
-  </header>
+    <header>
+        <div class="logo">
+            <h1>Vistora</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/category/tshirts">T-Shirts</a></li>
+                <li><a href="/category/trackpants">Track Pants</a></li>
+                <li><a href="/category/caps">Caps</a></li>
+                <li><a href="/category/hoodies">Hoodies</a></li>
+                <li><a href="/category/underwear">Underwear</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <main>
-<section class="category-section">
-  <div class="category-grid">
-    <a href="/category/tshirts" class="category-card">T-Shirts</a>
-    <a href="/category/trackpants" class="category-card">Track Pants</a>
-    <a href="/category/caps" class="category-card">Caps</a>
-    <a href="/category/hoodies" class="category-card">Hoodies</a>
-    <a href="/category/underwear" class="category-card">Underwear</a>
-  </div>
-</section>
+    <main class="homepage">
+        <h2>Shop by Category</h2>
+        <div class="category-grid">
+            <div class="category-card">
+                <a href="/category/tshirts">
+                    <img src="/static/images/tshirts.jpg" alt="T-Shirts">
+                    <span>T-Shirts</span>
+                </a>
+            </div>
+            <div class="category-card">
+                <a href="/category/trackpants">
+                    <img src="/static/images/trackpants.jpg" alt="Track Pants">
+                    <span>Track Pants</span>
+                </a>
+            </div>
+            <div class="category-card">
+                <a href="/category/caps">
+                    <img src="/static/images/caps.jpg" alt="Caps">
+                    <span>Caps</span>
+                </a>
+            </div>
+            <div class="category-card">
+                <a href="/category/hoodies">
+                    <img src="/static/images/hoodies.jpg" alt="Hoodies">
+                    <span>Hoodies</span>
+                </a>
+            </div>
+            <div class="category-card">
+                <a href="/category/underwear">
+                    <img src="/static/images/underwear.jpg" alt="Underwear">
+                    <span>Underwear</span>
+                </a>
+            </div>
+        </div>
+    </main>
 
-<div class="category-grid">
-  {% for category in categories %}
-    <div class="category-card">
-      <img src="{{ url_for('static', filename='images/' + category.image) }}" alt="{{ category.name }}">
-      <h3>{{ category.name }}</h3>
-    </div>
-  {% endfor %}
-</div>
-    </div>
-  </main>
+    <footer>
+        <p>&copy; 2025 Vistora. All rights reserved.</p>
+    </footer>
 </body>
 </html>
-
-<script>
-function filterCategories() {
-  const input = document.getElementById('searchInput').value.toLowerCase();
-  const cards = document.querySelectorAll('.category-card');
-
-  cards.forEach(card => {
-    const name = card.querySelector('h3').textContent.toLowerCase();
-    card.style.display = name.includes(input) ? 'block' : 'none';
-  });
-}
-</script>
