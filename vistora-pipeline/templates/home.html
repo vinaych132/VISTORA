@@ -1,63 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Vistora | Home</title>
-    <link rel="stylesheet" href="/static/styles.css">
+  <meta charset="UTF-8">
+  <title>Vistora | Home</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <header>
-        <div class="logo">
-            <h1>Vistora</h1>
-        </div>
-        <nav>
-            <ul class="nav-links">
-                <li><a href="/">Home</a></li>
-                <li><a href="/category/tshirts">T-Shirts</a></li>
-                <li><a href="/category/trackpants">Track Pants</a></li>
-                <li><a href="/category/caps">Caps</a></li>
-                <li><a href="/category/hoodies">Hoodies</a></li>
-                <li><a href="/category/underwear">Underwear</a></li>
-            </ul>
-        </nav>
-    </header>
+  <header>
+    <h1>Vistora</h1>
+    <nav>
+      <a href="/" class="active">Home</a>
+    </nav>
+  </header>
 
-    <!-- Categories Section -->
-    <section id="categories" class="category-section">
-                <div class="category-grid">
-            <!-- Category Cards -->        
-    <section id="categories" class="category-section">
-    <h3>Shop by Category</h3>
-    <div class="category-grid">
-        <a class="category-card" href="/category/tshirts">
-            <img src="/static/images/tshirts.jpg" alt="T-Shirts">
-            <span>T-Shirts</span>
-        </a>
-        <!-- Other category cards here -->
+  <main>
+    <div class="category-buttons">
+      <a href="/category/tshirts" class="category-button">T-Shirts</a>
+      <a href="/category/trackpants" class="category-button">Track Pants</a>
+      <a href="/category/caps" class="category-button">Caps</a>
+      <a href="/category/hoodies" class="category-button">Hoodies</a>
+      <a href="/category/underwear" class="category-button">Underwear</a>
     </div>
-</section>
-
-            <a class="category-card" href="/category/trackpants">
-                <img src="/static/images/trackpants.jpg" alt="Track Pants">
-                <span>Track Pants</span>
-            </a>
-            <a class="category-card" href="/category/caps">
-                <img src="/static/images/caps.jpg" alt="Caps">
-                <span>Caps</span>
-            </a>
-            <a class="category-card" href="/category/hoodies">
-                <img src="/static/images/hoodies.jpg" alt="Hoodies">
-                <span>Hoodies</span>
-            </a>
-            <a class="category-card" href="/category/underwear">
-                <img src="/static/images/underwear.jpg" alt="Underwear">
-                <span>Underwear</span>
-            </a>
-        </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2025 Vistora. All rights reserved.</p>
-    </footer>
+  </main>
 </body>
 </html>
