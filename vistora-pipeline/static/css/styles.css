@@ -362,3 +362,40 @@ nav a.active {
   background-color: #ff1c52;
 }
 
+.cart-item-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.cart-img {
+  width: 100px;
+  height: auto;
+  border-radius: 8px;
+  margin-right: 20px;
+  object-fit: cover;
+}
+
+.cart-item-row h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.cart-item-row p {
+  margin: 4px 0;
+}
+
+.remove-btn {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.remove-btn:hover {
+  background-color: #c0392b;
+}
