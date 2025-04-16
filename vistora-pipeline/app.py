@@ -49,15 +49,15 @@ def cart():
 @app.route('/add_to_cart/<item_name>', methods=['POST'])
 def add_to_cart(item_name):
     item_catalog = {
-        'Classic Tee': {'name': 'Classic Tee', 'price': 499, 'image': 'tshirt1.jpg'},
+        'Classic Tee': {'name': 'Classic Tee', 'price': 499, 'image': 'tshirt.jpg'},
         'V-Neck Tee': {'name': 'V-Neck Tee', 'price': 599, 'image': 'tshirt2.jpg'},
-        'Slim Trackpant': {'name': 'Slim Trackpant', 'price': 799, 'image': 'trackpant1.jpg'},
+        'Slim Trackpant': {'name': 'Slim Trackpant', 'price': 799, 'image': 'trackpant.jpg'},
         'Sport Trackpant': {'name': 'Sport Trackpant', 'price': 899, 'image': 'trackpant2.jpg'},
         'Basic Cap': {'name': 'Basic Cap', 'price': 299, 'image': 'cap1.jpg'},
         'Snapback Cap': {'name': 'Snapback Cap', 'price': 399, 'image': 'cap2.jpg'},
-        'Classic Hoodie': {'name': 'Classic Hoodie', 'price': 999, 'image': 'hoodie1.jpg'},
+        'Classic Hoodie': {'name': 'Classic Hoodie', 'price': 999, 'image': 'hoodie.jpg'},
         'Zipped Hoodie': {'name': 'Zipped Hoodie', 'price': 1199, 'image': 'hoodie2.jpg'},
-        'Cotton Briefs': {'name': 'Cotton Briefs', 'price': 199, 'image': 'underwear1.jpg'},
+        'Cotton Briefs': {'name': 'Cotton Briefs', 'price': 199, 'image': 'underwear.jpg'},
         'Boxer Shorts': {'name': 'Boxer Shorts', 'price': 299, 'image': 'underwear2.jpg'}
     }
 
