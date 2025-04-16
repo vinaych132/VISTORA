@@ -6,7 +6,6 @@ app.secret_key = 'your_secret_key'  # Required for session management
 # Route to display products for a specific category
 @app.route('/category/<category_name>')
 def category(category_name):
-    # Hardcoded products for the demo (can be dynamic from a database)
     products = {
         'tshirts': [
             {'name': 'Classic Tee', 'price': 499, 'image': 'tshirt1.jpg'},
@@ -31,24 +30,23 @@ def category(category_name):
     }
 
     items = products.get(category_name, [])
-    return render_template('category.html', category_name=category_name.capitalize(), items=items, cart_count=len(session.get('cart', [])))
+    return render_template(
+        'category.html',
+        category_name=category_name.capitalize(),
+        items=items,
+        cart_count=len(session.get('cart', []))
+    )
 
 # Cart Route - Displays the current cart
 @app.route('/cart')
 def cart():
-    # Get the cart data from the session
     cart_data = session.get('cart', [])
-    
-    # Calculate the total price
     total_price = sum(item['price'] * item['quantity'] for item in cart_data)
-    
     return render_template('cart.html', cart_data=cart_data, total_price=total_price)
 
-
-# Add to Cart Route - Add an item to the cart
+# Add to Cart Route
 @app.route('/add_to_cart/<item_name>', methods=['POST'])
 def add_to_cart(item_name):
-    # Example items (this can be dynamic, e.g., retrieved from a database)
     item_catalog = {
         'Classic Tee': {'name': 'Classic Tee', 'price': 499, 'image': 'tshirt1.jpg'},
         'V-Neck Tee': {'name': 'V-Neck Tee', 'price': 599, 'image': 'tshirt2.jpg'},
@@ -63,55 +61,44 @@ def add_to_cart(item_name):
     }
 
     item = item_catalog.get(item_name)
-    
+
     if item:
         cart_data = session.get('cart', [])
-        
-        # Check if item already in cart
         found = False
         for cart_item in cart_data:
             if cart_item['name'] == item['name']:
-                cart_item['quantity'] += 1  # Increment quantity if already in cart
+                cart_item['quantity'] += 1
                 found = True
                 break
-        
+
         if not found:
-            item['quantity'] = 1  # Add quantity if it's a new item
+            item['quantity'] = 1
             cart_data.append(item)
-        
-        session['cart'] = cart_data  # Store updated cart back to session
+
+        session['cart'] = cart_data
 
     return redirect(url_for('cart'))
-# Remove Item from Cart
-@app.route('/remove_from_cart/<item_name>', methods=['POST'])
-def remove_from_cart(item_name):
-    cart_data = session.get('cart', [])
-    cart_data = [item for item in cart_data if item['name'] != item_name]
-    session['cart'] = cart_data  # Store updated cart back to session
-    return redirect(url_for('cart'))
-
-# Cart Route - Displays the current cart
-@app.route('/cart')
-def cart():
-    # Get the cart data from the session
-    cart_data = session.get('cart', [])
-    return render_template('cart.html', cart_data=cart_data)
 
 # Remove Item from Cart
 @app.route('/remove_from_cart/<item_name>', methods=['POST'])
 def remove_from_cart(item_name):
     cart_data = session.get('cart', [])
     cart_data = [item for item in cart_data if item['name'] != item_name]
-    session['cart'] = cart_data  # Store updated cart back to session
+    session['cart'] = cart_data
     return redirect(url_for('cart'))
 
-
-# Clear Cart Route
+# Clear Cart
 @app.route('/clear_cart', methods=['POST'])
 def clear_cart():
-    session.pop('cart', None)  # Clear the cart from session
+    session.pop('cart', None)
     return redirect(url_for('cart'))
 
+# Checkout/Billing Page
+@app.route('/checkout')
+@app.route('/billing')
+def checkout():
+    cart_data = session.get('cart', [])
+    return render_template('billing.html', cart_data=cart_data)
 
 if __name__ == '__main__':
     app.run(debug=True)
