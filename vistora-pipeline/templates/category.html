@@ -2,24 +2,37 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>{{ category_name | capitalize }} - Vistora</title>
+  <title>{{ category_name }} – Vistora</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
   <header>
     <h1>Vistora</h1>
     <nav>
-      <a href="/">Home</a>
-      <a href="/category/{{ category_name }}" class="active">{{ category_name | capitalize }}</a>
-    </nav>
+  <a href="{{ url_for('home') }}">Home</a>
+  <a href="{{ url_for('category', category_name=category_name.lower()) }}" class="active">
+    {{ category_name }}
+  </a>
+  <a href="{{ url_for('cart') }}">🛒 Cart ({{ cart_data|length }})</a>
+</nav>
   </header>
 
   <main>
-    <h2>{{ category_name | capitalize }}</h2>
-
-    <!-- Category Images (Based on the category passed) -->
-    <div class="category-images">
-      <img src="{{ url_for('static', filename='images/' + category_name + '.jpg') }}" alt="{{ category_name }}">
+    <h2>{{ category_name }}</h2>
+    <div class="product-grid">
+      {% for item in items %}
+      <div class="product-card">
+        <img src="{{ url_for('static', filename='images/' + item.image) }}" alt="{{ item.name }}">
+        <h3>{{ item.name }}</h3>
+        <p>₹{{ item.price }}</p>
+        <form method="POST" action="{{ url_for('add_to_cart', item_name=item.name) }}">
+          <button type="submit">Add to Cart</button>
+        </form>
+      </div>
+      {% endfor %}
+      {% if not items %}
+        <p>No products found in this category.</p>
+      {% endif %}
     </div>
   </main>
 </body>
