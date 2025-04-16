@@ -98,14 +98,6 @@ def cart():
     return render_template('cart.html', cart_data=cart_data)
 
 
-# Checkout Route - Proceed to checkout page
-@app.route('/checkout')
-def checkout():
-    # Get the cart data and send it to the billing page
-    cart_data = session.get('cart', [])
-    return render_template('billing.html', cart_data=cart_data)
-
-
 # Remove Item from Cart
 @app.route('/remove_from_cart/<item_name>', methods=['POST'])
 def remove_from_cart(item_name):
