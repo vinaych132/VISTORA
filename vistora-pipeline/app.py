@@ -9,11 +9,11 @@ def category(category_name):
     # Hardcoded products for the demo (can be dynamic from a database)
     products = {
         'tshirts': [
-            {'name': 'Classic Tee', 'price': 499, 'image': 'tshirt1.jpg'},
+            {'name': 'Classic Tee', 'price': 499, 'image': 'tshirt.jpg'},
             {'name': 'V-Neck Tee', 'price': 599, 'image': 'tshirt2.jpg'}
         ],
         'trackpants': [
-            {'name': 'Slim Trackpant', 'price': 799, 'image': 'trackpant1.jpg'},
+            {'name': 'Slim Trackpant', 'price': 799, 'image': 'trackpant.jpg'},
             {'name': 'Sport Trackpant', 'price': 899, 'image': 'trackpant2.jpg'}
         ],
         'caps': [
@@ -21,11 +21,11 @@ def category(category_name):
             {'name': 'Snapback Cap', 'price': 399, 'image': 'cap2.jpg'}
         ],
         'hoodies': [
-            {'name': 'Classic Hoodie', 'price': 999, 'image': 'hoodie1.jpg'},
+            {'name': 'Classic Hoodie', 'price': 999, 'image': 'hoodie.jpg'},
             {'name': 'Zipped Hoodie', 'price': 1199, 'image': 'hoodie2.jpg'}
         ],
         'underwear': [
-            {'name': 'Cotton Briefs', 'price': 199, 'image': 'underwear1.jpg'},
+            {'name': 'Cotton Briefs', 'price': 199, 'image': 'underwear.jpg'},
             {'name': 'Boxer Shorts', 'price': 299, 'image': 'underwear2.jpg'}
         ]
     }
