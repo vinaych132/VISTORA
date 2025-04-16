@@ -6,6 +6,7 @@ app.secret_key = 'your_secret_key'  # Required for session management
 # Route to display products for a specific category
 @app.route('/category/<category_name>')
 def category(category_name):
+    # Hardcoded products for the demo (can be dynamic from a database)
     products = {
         'tshirts': [
             {'name': 'Classic Tee', 'price': 499, 'image': 'tshirt1.jpg'},
@@ -30,12 +31,12 @@ def category(category_name):
     }
 
     items = products.get(category_name, [])
-    return render_template(
-        'category.html',
-        category_name=category_name.capitalize(),
-        items=items,
-        cart_count=len(session.get('cart', []))
-    )
+    return render_template('category.html', category_name=category_name.capitalize(), items=items, cart_count=len(session.get('cart', [])))
+
+# Home route
+@app.route('/')
+def home():
+    return render_template('home.html', cart_data=session.get('cart', []))
 
 # Cart Route - Displays the current cart
 @app.route('/cart')
@@ -70,7 +71,6 @@ def add_to_cart(item_name):
                 cart_item['quantity'] += 1
                 found = True
                 break
-
         if not found:
             item['quantity'] = 1
             cart_data.append(item)
@@ -87,18 +87,19 @@ def remove_from_cart(item_name):
     session['cart'] = cart_data
     return redirect(url_for('cart'))
 
-# Clear Cart
+# Clear Cart Route
 @app.route('/clear_cart', methods=['POST'])
 def clear_cart():
     session.pop('cart', None)
     return redirect(url_for('cart'))
 
-# Checkout/Billing Page
-@app.route('/checkout')
+# Billing / Checkout Route
 @app.route('/billing')
-def checkout():
+@app.route('/checkout')
+def billing():
     cart_data = session.get('cart', [])
-    return render_template('billing.html', cart_data=cart_data)
+    total_price = sum(item['price'] * item['quantity'] for item in cart_data)
+    return render_template('billing.html', cart_data=cart_data, total_price=total_price)
 
 if __name__ == '__main__':
     app.run(debug=True)
