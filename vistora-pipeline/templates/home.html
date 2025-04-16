@@ -27,16 +27,21 @@
 <!-- In templates/home.html -->
 <div class="category-grid">
   <a href="{{ url_for('category', category_name='tshirts') }}" class="category-card">
-    <img src="{{ url_for('static', filename='images/tshirts.jpg') }}" alt="T‑Shirts">
     <h3>T‑Shirts</h3>
   </a>
   <a href="{{ url_for('category', category_name='trackpants') }}" class="category-card">
-    <img src="{{ url_for('static', filename='images/trackpants.jpg') }}" alt="Track Pants">
     <h3>Track Pants</h3>
   </a>
-  <!-- repeat for hoodies, caps, underwear -->
+  <a href="{{ url_for('category', category_name='caps') }}" class="category-card">
+    <h3>Caps</h3>
+  </a>
+  <a href="{{ url_for('category', category_name='hoodies') }}" class="category-card">
+    <h3>Hoodies</h3>
+  </a>
+  <a href="{{ url_for('category', category_name='underwear') }}" class="category-card">
+    <h3>Underwear</h3>
+  </a>
 </div>
-
   </main>
 
 <script>
