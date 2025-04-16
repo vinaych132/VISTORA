@@ -82,8 +82,6 @@ def add_to_cart(item_name):
         session['cart'] = cart_data  # Store updated cart back to session
 
     return redirect(url_for('cart'))
-
-
 # Remove Item from Cart
 @app.route('/remove_from_cart/<item_name>', methods=['POST'])
 def remove_from_cart(item_name):
