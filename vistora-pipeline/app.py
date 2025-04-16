@@ -90,31 +90,6 @@ def remove_from_cart(item_name):
     session['cart'] = cart_data  # Store updated cart back to session
     return redirect(url_for('cart'))
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # Cart Route - Displays the current cart
 @app.route('/cart')
 def cart():
