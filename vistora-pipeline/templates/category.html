@@ -2,21 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Vistora | {{ category_name }}</title>
+  <title>{{ category_name }} | Vistora</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
+
   <header>
     <h1>Vistora</h1>
     <nav>
       <a href="{{ url_for('home') }}">Home</a>
-      <a href="{{ url_for('cart') }}">🛒 Cart ({{ cart_data|length if cart_data else 0 }})</a>
+      <a href="{{ url_for('cart') }}">🛒 Cart ({{ cart_count }})</a>
     </nav>
   </header>
 
   <main>
-    <h2>{{ category_name }}</h2>
-    
+    <h2>{{ category_name }} Products</h2>
+
     <div class="product-grid">
       {% for item in items %}
       <div class="product-card">
@@ -26,12 +27,10 @@
         <form action="{{ url_for('add_to_cart', item_name=item.name) }}" method="POST">
           <button type="submit">Add to Cart</button>
         </form>
-        <form action="{{ url_for('checkout') }}" method="GET">
-          <button type="submit">Buy Now</button>
-        </form>
       </div>
       {% endfor %}
     </div>
   </main>
+
 </body>
 </html>
