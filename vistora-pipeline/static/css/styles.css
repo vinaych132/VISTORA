@@ -289,3 +289,12 @@ nav a.active {
   background-color: #218838;
 }
 
+.product-card img,
+.category-card img {
+  width: 100%;
+  max-width: 250px;    /* Prevents images from getting wider than 250px */
+  height: auto;        /* Keeps aspect ratio */
+  object-fit: cover;   /* Crops if necessary to fill the box */
+  border-radius: 8px;  /* Optional: rounded corners */
+}
+
