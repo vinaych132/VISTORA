@@ -33,6 +33,17 @@ def category(category_name):
     items = products.get(category_name, [])
     return render_template('category.html', category_name=category_name.capitalize(), items=items, cart_count=len(session.get('cart', [])))
 
+# Cart Route - Displays the current cart
+@app.route('/cart')
+def cart():
+    # Get the cart data from the session
+    cart_data = session.get('cart', [])
+    
+    # Calculate the total price
+    total_price = sum(item['price'] * item['quantity'] for item in cart_data)
+    
+    return render_template('cart.html', cart_data=cart_data, total_price=total_price)
+
 
 # Add to Cart Route - Add an item to the cart
 @app.route('/add_to_cart/<item_name>', methods=['POST'])
@@ -55,10 +66,55 @@ def add_to_cart(item_name):
     
     if item:
         cart_data = session.get('cart', [])
-        cart_data.append(item)  # Add item to the cart
+        
+        # Check if item already in cart
+        found = False
+        for cart_item in cart_data:
+            if cart_item['name'] == item['name']:
+                cart_item['quantity'] += 1  # Increment quantity if already in cart
+                found = True
+                break
+        
+        if not found:
+            item['quantity'] = 1  # Add quantity if it's a new item
+            cart_data.append(item)
+        
         session['cart'] = cart_data  # Store updated cart back to session
 
     return redirect(url_for('cart'))
+
+
+# Remove Item from Cart
+@app.route('/remove_from_cart/<item_name>', methods=['POST'])
+def remove_from_cart(item_name):
+    cart_data = session.get('cart', [])
+    cart_data = [item for item in cart_data if item['name'] != item_name]
+    session['cart'] = cart_data  # Store updated cart back to session
+    return redirect(url_for('cart'))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # Cart Route - Displays the current cart
