@@ -1,131 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Billing - VISTORA</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      padding: 30px;
-      margin: 0;
-      background: url('assets/Images/optimized_background.jpg') no-repeat center center fixed;
-      background-size: cover;
-      color: #333;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Summary</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1a1a;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        h1, h2 {
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        a {
+            text-decoration: none;
+            color: #fff;
+        }
 
-    .billing-container {
-      background-color: rgba(255, 255, 255, 0.95);
-      padding: 30px;
-      border-radius: 12px;
-      max-width: 600px;
-      margin: auto;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    }
+        /* Header */
+        header {
+            background-color: #333;
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            color: #e6e6e6;
+        }
 
-    h1 {
-      font-size: 28px;
-      font-weight: bold;
-      text-align: center;
-      margin-bottom: 20px;
-    }
+        /* Order Summary */
+        .order-summary {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #262626;
+            border-radius: 8px;
+        }
+        .order-summary h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        .order-summary p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 10px 0;
+        }
+        .order-summary .total {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 20px;
+        }
 
-    label {
-      display: block;
-      margin-top: 12px;
-      font-weight: 500;
-    }
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            margin: 10px 0;
+            background-color: #e60000;
+            color: #fff;
+            font-size: 1rem;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #b30000;
+        }
 
-    input[type="text"],
-    input[type="email"],
-    input[type="number"] {
-      width: 100%;
-      padding: 10px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      box-sizing: border-box;
-      margin-top: 6px;
-    }
-
-    .payment-option {
-      display: flex;
-      align-items: center;
-      margin-top: 12px;
-    }
-
-    .payment-option img {
-      margin-right: 10px;
-      width: 40px;
-      height: auto;
-    }
-
-    .submit-button {
-      margin-top: 24px;
-      padding: 12px 28px;
-      background-color: #28a745;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      font-size: 16px;
-      cursor: pointer;
-      width: 100%;
-    }
-
-    .submit-button:hover {
-      background-color: #218838;
-    }
-  </style>
-
-  <script>
-    function handleStaticSubmit(event) {
-      event.preventDefault();
-      setTimeout(() => {
-        window.location.href = "success.html";
-      }, 1000);
-    }
-  </script>
+        /* Footer */
+        footer {
+            background-color: #333;
+            padding: 10px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 <body>
 
-  <div class="billing-container">
-    <h1>Billing Details</h1>
+    <!-- Header -->
+    <header>
+        <h1>Order Summary</h1>
+    </header>
 
-    <form onsubmit="handleStaticSubmit(event)">
-      <label>Full Name:
-        <input type="text" name="fullname" required />
-      </label>
+    <!-- Order Summary -->
+    <div class="order-summary">
+        <h2>Order Summary</h2>
+        <p><strong>Order Number:</strong> #123456789</p>
+        <p><strong>Order Date:</strong> April 12, 2025</p>
+        <p><strong>Shipping Address:</strong> 123 Street Name, City, State, ZIP</p>
 
-      <label>Address:
-        <input type="text" name="address" required />
-      </label>
+        <h3>Items Ordered:</h3>
+        <ul>
+            <li>Black Oversized T-Shirt - ₹999</li>
+            <li>Dark Grey Cargo Pants - ₹1,299</li>
+            <li>Red Snapback Cap - ₹499</li>
+        </ul>
 
-      <label>Email:
-        <input type="email" name="email" required />
-      </label>
+        <p class="total">Total: ₹2,797</p>
 
-      <label>Payment Method:</label>
+        <a href="https://www.example.com/track-order" class="btn">Track Your Order</a>
+        <a href="https://www.example.com/returns-exchange" class="btn">Return or Exchange</a>
+    </div>
 
-      <div class="payment-option">
-        <input type="radio" name="payment_method" value="Visa" required />
-        <img src="assets/icons/visa.png" alt="Visa Icon" /> Visa
-      </div>
-
-      <div class="payment-option">
-        <input type="radio" name="payment_method" value="PayPal" />
-        <img src="assets/icons/paypal.png" alt="PayPal Icon" /> PayPal
-      </div>
-
-      <div class="payment-option">
-        <input type="radio" name="payment_method" value="Cash on Delivery" />
-        <img src="assets/icons/cod.png" alt="COD Icon" /> Cash on Delivery
-      </div>
-
-      <label>Total Amount:
-        <input type="text" name="amount" value="₹20000" readonly />
-      </label>
-
-      <button type="submit" class="submit-button">Submit</button>
-    </form>
-  </div>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Your Brand. All Rights Reserved.</p>
+    </footer>
 
 </body>
 </html>
