@@ -1,6 +1,6 @@
 from flask import Flask, render_template, session, redirect, url_for, request
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
 app.secret_key = 'your_secret_key'  # Required for session management
 
 # Route to display products for a specific category

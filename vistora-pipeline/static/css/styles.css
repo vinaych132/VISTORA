@@ -2,7 +2,7 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background-image: url('/static/images/background.jpg');
+  background-image: url('../images/background.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -285,16 +285,8 @@ h2 {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   color: #333;
   align-items: center;
-  max-width: 100%;
-}
-
-.cart-img {
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-right: 20px;
-  flex-shrink: 0;
+  max-width: 700px;
+  margin: auto;
 }
 
 .cart-item h3 {
@@ -337,4 +329,29 @@ h2 {
 
 .checkout-btn:hover {
   background-color: #218838;
+}
+
+/* === FIXED CART IMAGE STYLE === */
+.cart-item img.cart-img {
+  width: 120px !important;
+  height: 120px !important;
+  max-width: 120px !important;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 20px;
+  flex-shrink: 0;
+  display: block;
+}
+
+.model-section {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.model-img {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 15px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  animation: fadeInUp 1s ease;
 }
